@@ -57,8 +57,8 @@ unittest(test_P_smaller)
 
   G.begin(0, 1);
 
-  assertEqualFloat(0.0000, G.P_smaller(-10.0), 0.0001);
-  assertEqualFloat(0.0006, G.P_smaller(-6.5), 0.0001);
+  assertEqualFloat(0.0000, G.P_smaller(-6.0), 0.0001);
+  assertEqualFloat(0.0001, G.P_smaller(-4.0), 0.0001);
   assertEqualFloat(0.0013, G.P_smaller(-3.0), 0.0001);
   assertEqualFloat(0.0228, G.P_smaller(-2.0), 0.0001);
   assertEqualFloat(0.1587, G.P_smaller(-1.0), 0.0001);
@@ -66,8 +66,8 @@ unittest(test_P_smaller)
   assertEqualFloat(0.8413, G.P_smaller(1.0), 0.0001);
   assertEqualFloat(0.9772, G.P_smaller(2.0), 0.0001);
   assertEqualFloat(0.9987, G.P_smaller(3.0), 0.0001);
-  assertEqualFloat(0.9994, G.P_smaller(6.5), 0.0001);
-  assertEqualFloat(1.0000, G.P_smaller(10.0), 0.0001);
+  assertEqualFloat(0.9999, G.P_smaller(4.0), 0.0001);
+  assertEqualFloat(1.0000, G.P_smaller(6.0), 0.0001);
 }
 
 
@@ -116,6 +116,22 @@ unittest(test_P_equal)
   assertEqualFloat(0.241971, G.P_equal(1.0), 0.0001);
   assertEqualFloat(0.053991, G.P_equal(2.0), 0.0001);
   assertEqualFloat(0.004432, G.P_equal(3.0), 0.0001);
+}
+
+
+unittest(test_normailze)
+{
+  Gauss G;
+
+  G.begin(100, 25);
+
+  assertEqualFloat(-3.0, G.normailze(25), 0.0001);
+  assertEqualFloat(-2.0, G.normailze(50), 0.0001);
+  assertEqualFloat(-1.0, G.normailze(75), 0.0001);
+  assertEqualFloat(0.0, G.normailze(100), 0.0001);
+  assertEqualFloat(1.0, G.normailze(125), 0.0001);
+  assertEqualFloat(2.0, G.normailze(150), 0.0001);
+  assertEqualFloat(3.0, G.normailze(175), 0.0001);
 }
 
 

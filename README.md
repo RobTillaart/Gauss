@@ -57,6 +57,7 @@ Note: 0.1.0 was 32 points 4 decimals. Need to investigate reduction of points.
 #### Related
 
 - https://en.wikipedia.org/wiki/Normal_distribution
+- https://sphweb.bumc.bu.edu/otlt/mph-modules/bs/bs704_probability/bs704_probability9.html
 - https://github.com/RobTillaart/Multimap
 - https://github.com/RobTillaart/Statistic  (more stat links there).
 
