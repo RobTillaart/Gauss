@@ -8,9 +8,6 @@
 
 Gauss G;
 
-uint32_t start;
-uint32_t stop;
-
 
 void setup(void)
 {
@@ -19,10 +16,9 @@ void setup(void)
   Serial.print("GAUSS_LIB_VERSION: ");
   Serial.println(GAUSS_LIB_VERSION);
 
-  //  test_1();
-  //  test_2();
-  //  test_3();
-  //  get_bell_curve();
+  test_1();
+  test_2();
+  test_3();
   test_4();
 
   Serial.println("\ndone...");
@@ -70,32 +66,16 @@ void test_3()
 }
 
 
-void get_bell_curve()
-{
-  G.begin(0, 1);
-
-  for (float f = -5.0; f <= 5.0; f += 0.05)
-  {
-    float a = G.P_smaller(f - 0.025);
-    float b = G.P_smaller(f + 0.025);
-    Serial.println(1000 * (b - a), 6);
-  }
-  Serial.println();
-}
-
-
 void test_4()
 {
   G.begin(0, 1);
 
   for (float f = -5.0; f <= 5.0; f += 0.01)
   {
-    Serial.println(100.0 * G.calc(f));
-    //    float a = G.P_smaller(f - 0.025);
-    //    float b = G.P_smaller(f + 0.025);
-    //    Serial.println(100 * (b - a), 6);
+    Serial.println(100.0 * G.P_equal(f));
   }
   Serial.println();
 }
+
 
 // -- END OF FILE --

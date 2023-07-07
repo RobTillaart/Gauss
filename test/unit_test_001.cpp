@@ -31,6 +31,7 @@ unittest_setup()
     fprintf(stderr, "GAUSS_LIB_VERSION: %s\n", (char *) GAUSS_LIB_VERSION);
 }
 
+
 unittest_teardown()
 {
 }
