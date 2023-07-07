@@ -101,7 +101,13 @@ unittest(test_P_equal)
 
   G.begin(0, 1);
 
-  assertEqualFloat(0.0, G.P_equal(0.0), 0.001);
+  assertEqualFloat(0.000000, G.P_equal(-3.0), 0.001);
+  assertEqualFloat(0.000000, G.P_equal(-2.0), 0.001);
+  assertEqualFloat(0.000000, G.P_equal(-1.0), 0.001);
+  assertEqualFloat(0.398942, G.P_equal(0.0), 0.001);
+  assertEqualFloat(0.000000, G.P_equal(1.0), 0.001);
+  assertEqualFloat(0.000000, G.P_equal(2.0), 0.001);
+  assertEqualFloat(0.000000, G.P_equal(3.0), 0.001);
 }
 
 
