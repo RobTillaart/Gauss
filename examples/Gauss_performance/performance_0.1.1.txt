@@ -1,0 +1,16 @@
+Arduino UNO
+IDE 1.8.19
+
+Gauss_performance.ino
+GAUSS_LIB_VERSION: 0.1.1
+
+Timing in micros
+
+P_smaller:	353488
+P_larger:	362468
+P_between:	257824
+normalize:	23020
+bellCurve:	205468
+approx.bell:	720204
+
+done...
