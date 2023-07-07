@@ -20,12 +20,15 @@ void setup(void)
   Serial.print("GAUSS_LIB_VERSION: ");
   Serial.println(GAUSS_LIB_VERSION);
   Serial.println();
+  Serial.println("Timing in micros");
+  Serial.println();
   
   test_1();
   test_2();
   test_3();
   test_4();
   test_5();
+  test_6();
 
   Serial.println("\ndone...");
 }
@@ -116,11 +119,32 @@ void test_5()
   start = micros();
   for (float f = -5.0; f <= 5.0; f += 0.01)
   {
-    x =  G.bellCurve(f);
+    x = G.bellCurve(f);
   }
   stop = micros();
 
   Serial.print("bellCurve:\t");
+  Serial.print(stop - start);
+  Serial.println();
+}
+
+
+void test_6()
+{
+  delay(10);
+  G.begin(0, 1);
+
+  float cf = 0.52330751;  //  See Gauss_test_bell_curve.ino
+  start = micros();
+  for (float f = -5.0; f <= 5.0; f += 0.01)
+  {
+    float a = G.P_smaller(f - cf);
+    float b = G.P_smaller(f + cf);
+    x = a - b;
+  }
+  stop = micros();
+
+  Serial.print("approx.bell:\t");
   Serial.print(stop - start);
   Serial.println();
 }
