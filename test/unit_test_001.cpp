@@ -125,13 +125,13 @@ unittest(test_normailze)
 
   G.begin(100, 25);
 
-  assertEqualFloat(-3.0, G.normailze(25), 0.0001);
-  assertEqualFloat(-2.0, G.normailze(50), 0.0001);
-  assertEqualFloat(-1.0, G.normailze(75), 0.0001);
-  assertEqualFloat(0.0, G.normailze(100), 0.0001);
-  assertEqualFloat(1.0, G.normailze(125), 0.0001);
-  assertEqualFloat(2.0, G.normailze(150), 0.0001);
-  assertEqualFloat(3.0, G.normailze(175), 0.0001);
+  assertEqualFloat(-3.0, G.normalize(25), 0.0001);
+  assertEqualFloat(-2.0, G.normalize(50), 0.0001);
+  assertEqualFloat(-1.0, G.normalize(75), 0.0001);
+  assertEqualFloat(0.0, G.normalize(100), 0.0001);
+  assertEqualFloat(1.0, G.normalize(125), 0.0001);
+  assertEqualFloat(2.0, G.normalize(150), 0.0001);
+  assertEqualFloat(3.0, G.normalize(175), 0.0001);
 }
 
 
