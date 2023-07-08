@@ -110,9 +110,11 @@ E.g if mean == 50 and stddev == 14, then 71 ==> +1.5 sigma.
 
 ## Performance
 
+Indicative numbers for 1000 calls, timing in micros.
+
 Arduino UNO, 16 MHz, IDE 1.8.19
 
-|   function    |  0.1.0   |  0.1.1   |  notes  |
+|  function     |  0.1.0   |  0.1.1   |  notes  |
 |:--------------|:--------:|:--------:|:--------|
 |  P_smaller    |  375396  |  365964  |
 |  P_larger     |  384368  |  375032  |
@@ -124,7 +126,7 @@ Arduino UNO, 16 MHz, IDE 1.8.19
 
 ESP32, 240 MHz, IDE 1.8.19
 
-|   function    |  0.1.0   |  0.1.1   |  notes  |
+|  function     |  0.1.0   |  0.1.1   |  notes  |
 |:--------------|:--------:|:--------:|:--------|
 |  P_smaller    |    -     |    4046  |
 |  P_larger     |    -     |    4043  |
@@ -132,7 +134,6 @@ ESP32, 240 MHz, IDE 1.8.19
 |  normalize    |    -     |     592  |
 |  bellCurve    |    -     |   13522  |
 |  approx.bell  |    -     |    7300  | 
-
 
 
 ## Future
