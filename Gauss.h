@@ -99,19 +99,20 @@ private:
 
   float _P_smaller(float x)
   {
-    //  TODO reduce points. ==> 68 floats == 272 bytes !!
     //  NORM.DIST(mean, stddev, x, true)
     float __gauss[] = {
-      0.50000000, 0.53982784, 0.57925971, 0.61791142, 
+      0.50000000, 0.53982784, 0.57925971, 0.61791142,
       0.65542174, 0.69146246, 0.72574688, 0.75803635,
-      0.78814460, 0.81593987, 0.84134475, 0.86433394, 
+      0.78814460, 0.81593987, 0.84134475, 0.86433394,
       0.88493033, 0.90319952, 0.91924334, 0.93319280,
-      0.94520071, 0.95543454, 0.96406968, 0.97128344, 
+      0.94520071, 0.95543454, 0.96406968, 0.97128344,
       0.97724987, 0.98213558, 0.98609655, 0.98927589,
-      0.99180246, 0.99379033, 0.99533881, 0.99653303, 
+      0.99180246, 0.99379033, 0.99533881, 0.99653303,
       0.99744487, 0.99813419, 0.99865010, 0.99996833,
       0.99999971, 1.00000000
     };
+
+    //  0..60000  uint16_t = 68 bytes less
     float __z[] = {
       0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7,
       0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5,
@@ -120,12 +121,15 @@ private:
       5.0, 6.0
     };
 
+    //  a dedicated MultiMap could exploit the fact that
+    //  the __z[] array is largely equidistant.
+    //  that could remove the __z[] array (almost) completely.
     if (x < 0) return 1.0 - multiMap<float>(-x, __z, __gauss, 34);
     return multiMap<float>(x, __z, __gauss, 34);
   }
 
   float _mean = 0;
-  float _stddev = 1;
+  float _stddev = 1;       //  not needed as _reciprokeSD holds same info?
   float _reciprokeSD = 1;
 };
 

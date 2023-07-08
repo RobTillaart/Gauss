@@ -89,8 +89,10 @@ Probability functions return NAN if stddev == 0.
 
 - **float P_smaller(float f)** returns probability **P(x < f)**.
 Multiply by 100.0 to get the value as a percentage.
+A.k.a. **CDF()** Cumulative Distribution Function.
 - **float P_larger(float f)** returns probability **P(x > f)**.
 Multiply by 100.0 to get the value as a percentage.
+As the distribution is continuous **P_larger(f) == 1 - P_smaller(f)**.
 - **float P_between(float f, float g)** returns probability **P(f < x < g)**.
 Multiply by 100.0 to get the value as a percentage.
 - **float P_equal(float f)** returns probability **P(x == f)**.
@@ -108,16 +110,29 @@ E.g if mean == 50 and stddev == 14, then 71 ==> +1.5 sigma.
 
 ## Performance
 
-Arduino UNO, IDE 1.8.19
+Arduino UNO, 16 MHz, IDE 1.8.19
 
 |   function    |  0.1.0   |  0.1.1   |  notes  |
 |:--------------|:--------:|:--------:|:--------|
-|  P_smaller    |  375396  |  353488  |
-|  P_larger     |  384368  |  362468  |
-|  P_between    |  265624  |  257824  |
-|  normalize    |   44172  |   23020  |
-|  bellCurve    |  255728  |  205468  |
-|  approx.bell  |  764028  |  720204  |  see examples 
+|  P_smaller    |  375396  |  365964  |
+|  P_larger     |  384368  |  375032  |
+|  P_between    |  265624  |  269176  |
+|  normalize    |   44172  |   23024  |
+|  bellCurve    |  255728  |  205460  |
+|  approx.bell  |  764028  |  719184  |  see examples 
+
+
+ESP32, 240 MHz, IDE 1.8.19
+
+|   function    |  0.1.0   |  0.1.1   |  notes  |
+|:--------------|:--------:|:--------:|:--------|
+|  P_smaller    |    -     |    4046  |
+|  P_larger     |    -     |    4043  |
+|  P_between    |    -     |    3023  |
+|  normalize    |    -     |     592  |
+|  bellCurve    |    -     |   13522  |
+|  approx.bell  |    -     |    7300  | 
+
 
 
 ## Future
@@ -133,6 +148,7 @@ Arduino UNO, IDE 1.8.19
   - revisit lookup of MultiMap
   - (-10 .. 0) might be more accurate (significant digits)?
   - double instead of floats? (good table?)
+  - make use of equidistant \_\_z\[] table
 
 
 #### Could
@@ -142,6 +158,14 @@ Arduino UNO, IDE 1.8.19
   - e.g. loadcell (HX711)
 - embed MultiMap hardcoded instead of library dependency
 - add unit tests
+- remove **\_stddev** as **\_reciprokeSD** holds same information.
+- reverse normalization
+  - G(100,25) which value has stddev 0.735?
+- **VAL(probability = 0.75)** ==>  134 whatever
+  - Returns the value of the distribution for which the **CDF()** is at least probability.
+  - Inverse of **P_smaller()**
+- **float P_outside(float f, float g)** returns probability **P(x < f) + P(g < x)**.
+  - assuming no overlap. Use **P_outside() = 1 - P_between()**
 
 
 #### Won't (unless requested)
