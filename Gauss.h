@@ -46,7 +46,7 @@ public:
 
   float P_smaller(float value)
   {
-    if (_reciprokeSD == 0) return NAN;
+    if (_reciprokeSD == NAN) return NAN;
     return _P_smaller((value - _mean) * _reciprokeSD);
   }
 
@@ -59,7 +59,7 @@ public:
 
   float P_between(float p, float q)
   {
-    if (_reciprokeSD == 0) return NAN;
+    if (_reciprokeSD == NAN) return NAN;
     if (p >= q) return 0;
     return P_smaller(q) - P_smaller(p);
   }
@@ -73,10 +73,11 @@ public:
 
   float P_equal(float value)
   {
-    if (_reciprokeSD == 0) return NAN;
+    if (_reciprokeSD == NAN) return NAN;
     float n = (value - _mean) * _reciprokeSD;
+    //  gain of ~10% if we allocate a global var for 'constant' c
     float c = _reciprokeSD * (1.0 / sqrt(TWO_PI));
-    return c * exp(-0.5 * n * n);
+    return c * exp(-0.5 * (n * n));
   }
 
 
@@ -94,7 +95,7 @@ public:
 
   float denormalize(float value)
   {
-    return value/ _reciprokeSD + mean;
+    return value / _reciprokeSD + _mean;
   }
 
 

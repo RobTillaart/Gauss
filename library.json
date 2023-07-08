@@ -14,7 +14,7 @@
   {
     "type": "git",
     "url": "https://github.com/RobTillaart/Gauss.git"
-  }
+  },
   "version": "0.2.0",
   "license": "MIT",
   "frameworks": "arduino",

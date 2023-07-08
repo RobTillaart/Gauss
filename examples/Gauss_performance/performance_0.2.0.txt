@@ -6,12 +6,12 @@ GAUSS_LIB_VERSION: 0.2.0
 
 Timing in micros (1000 calls)
 
-P_smaller:	163376
-P_larger:	172892
-P_between:	157384
-normalize:	23016
-bellCurve:	205092
-approx.bell:	340844
+P_smaller:	159536
+P_larger:	169056
+P_between:	150148
+normalize:	23024
+bellCurve:	192524
+approx.bell:	333172
 
 done...
 
