@@ -103,9 +103,11 @@ This uses the bell curve formula.
 
 - **float normalize(float f)** normalize a value to normalized distribution.
 Is equal to number of **stddevs()**.
-- **float denormalize(float f)** reverses normalize().
+- **float denormalize(float f)** reverses normalize(). 
+What value would have a deviation of 1.73 stddev.
 - **float stddevs(float f)** returns the number of stddevs from the mean.
 E.g if mean == 50 and stddev == 14, then 71 ==> +1.5 sigma.
+Identical to **normalize()**.
 - **float bellCurve(float f)** returns probability **P(x == f)**.
 
 

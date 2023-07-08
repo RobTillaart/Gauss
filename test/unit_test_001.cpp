@@ -109,13 +109,13 @@ unittest(test_P_outside)
 
   G.begin(0, 1);
 
-  assertEqualFloat(G.P_outside(-3.0, 0.0), 1 - G.P_between(-3.0, 0.0), 0.0001);
-  assertEqualFloat(G.P_outside(-2.0, 0.0), 1 - G.P_between(-2.0, 0.0), 0.0001);
-  assertEqualFloat(G.P_outside(-1.0, 0.0), 1 - G.P_between(-1.0, 0.0), 0.0001);
-  assertEqualFloat(G.P_outside(0.0, 0.0),  1 - G.P_between(0.0, 0.0),  0.0001);
-  assertEqualFloat(G.P_outside(0.0, 1.0),  1 - G.P_between(0.0, 1.0),  0.0001);
-  assertEqualFloat(G.P_outside(0.0, 2.0),  1 - G.P_between(0.0, 2.0),  0.0001);
-  assertEqualFloat(G.P_outside(0.0, 3.0),  1 - G.P_between(0.0, 3.0),  0.0001);
+  assertEqualFloat(0.5013, G.P_outside(-3.0, 0.0), 0.0001);
+  assertEqualFloat(0.5228, G.P_outside(-2.0, 0.0), 0.0001);
+  assertEqualFloat(0.6587, G.P_outside(-1.0, 0.0), 0.0001);
+  assertEqualFloat(1.0000, G.P_outside(0.0, 0.0),  0.0001);
+  assertEqualFloat(0.6587, G.P_outside(0.0, 1.0), 0.0001);
+  assertEqualFloat(0.5228, G.P_outside(0.0, 2.0), 0.0001);
+  assertEqualFloat(0.5013, G.P_outside(0.0, 3.0), 0.0001);
 }
 
 
