@@ -8,7 +8,7 @@
 
 # Gauss
 
-Library for the Gauss probability math.
+Library for the Gauss probability math. (normal distribution).
 
 
 ## Description
@@ -19,11 +19,11 @@ These under the premises of a Gaussian distribution with parameters **mean** and
 (a.k.a. average / mu / µ and standard deviation / sigma / σ).
 If these parameters are not given, 0 and 1 are used by default (normalized Gaussian distribution).
 
-The values are approximated with **MultiMap()** using a 32 points interpolated lookup.
+The values are approximated with **MultiMap()** using a 34 points interpolated lookup.
 Therefore the **MultiMap** library need to be downloaded too (see related below).
 The number of lookup points might chance in the future.
 
-Return values are given as floats, if one needs percentages, just multiply by 100.0.
+Return values are given as a float 0.0 .. 1.0, if one needs percentages, multiply by 100.0.
 
 
 #### Accuracy
@@ -36,6 +36,7 @@ For many applications this accuracy is sufficient.
 Values of the table are calculated with ```NORM.DIST(mean, stddev, x, true)```.
 
 Note: 0.1.0 was 32 points 4 decimals. Need to investigate reduction of points.
+
 
 #### Applications
 
@@ -85,24 +86,24 @@ The default values (0,1) gives the normalized Gaussian distribution.
 
 #### Probability
 
-Probability functions return NAN if stddev == 0.
+Probability functions return NAN if stddev == 0.  
+Multiply probabilities by 100.0 to get the value as a percentage.
 
 - **float P_smaller(float f)** returns probability **P(x < f)**.
-Multiply by 100.0 to get the value as a percentage.
 A.k.a. **CDF()** Cumulative Distribution Function.
 - **float P_larger(float f)** returns probability **P(x > f)**.
-Multiply by 100.0 to get the value as a percentage.
 As the distribution is continuous **P_larger(f) == 1 - P_smaller(f)**.
 - **float P_between(float f, float g)** returns probability **P(f < x < g)**.
-Multiply by 100.0 to get the value as a percentage.
 - **float P_equal(float f)** returns probability **P(x == f)**.
 This uses the bell curve formula.
-
+- **float P_outside(float f, float g)** returns probability **P(x < f) + P(g < x)**.
+  - **P_outside() = 1 - P_between()**
 
 #### Other
 
 - **float normalize(float f)** normalize a value to normalized distribution.
 Is equal to number of **stddevs()**.
+- **float denormalize(float f)** reverses normalize().
 - **float stddevs(float f)** returns the number of stddevs from the mean.
 E.g if mean == 50 and stddev == 14, then 71 ==> +1.5 sigma.
 - **float bellCurve(float f)** returns probability **P(x == f)**.
@@ -114,26 +115,26 @@ Indicative numbers for 1000 calls, timing in micros.
 
 Arduino UNO, 16 MHz, IDE 1.8.19
 
-|  function     |  0.1.0   |  0.1.1   |  notes  |
-|:--------------|:--------:|:--------:|:--------|
-|  P_smaller    |  375396  |  365964  |
-|  P_larger     |  384368  |  375032  |
-|  P_between    |  265624  |  269176  |
-|  normalize    |   44172  |   23024  |
-|  bellCurve    |  255728  |  205460  |
-|  approx.bell  |  764028  |  719184  |  see examples 
+|  function     |  0.1.0   |  0.1.1   |  0.2.0   |  notes  |
+|:--------------|:--------:|:--------:|:--------:|:--------|
+|  P_smaller    |  375396  |  365964  |  163376  |
+|  P_larger     |  384368  |  375032  |  172892  |
+|  P_between    |  265624  |  269176  |  157384  |
+|  normalize    |   44172  |   23024  |   23016  |
+|  bellCurve    |  255728  |  205460  |  205092  |
+|  approx.bell  |  764028  |  719184  |  340844  |  see examples 
 
 
 ESP32, 240 MHz, IDE 1.8.19
 
-|  function     |  0.1.0   |  0.1.1   |  notes  |
-|:--------------|:--------:|:--------:|:--------|
-|  P_smaller    |    -     |    4046  |
-|  P_larger     |    -     |    4043  |
-|  P_between    |    -     |    3023  |
-|  normalize    |    -     |     592  |
-|  bellCurve    |    -     |   13522  |
-|  approx.bell  |    -     |    7300  | 
+|  function     |  0.1.0   |  0.1.1   |  0.2.0   |  notes  |
+|:--------------|:--------:|:--------:|:--------:|:--------|
+|  P_smaller    |    -     |    4046  |    1498  |
+|  P_larger     |    -     |    4043  |    1516  |
+|  P_between    |    -     |    3023  |    1569  |
+|  normalize    |    -     |     592  |     585  |
+|  bellCurve    |    -     |   13522  |   13534  |
+|  approx.bell  |    -     |    7300  |    2494  | 
 
 
 ## Future
@@ -145,29 +146,17 @@ ESP32, 240 MHz, IDE 1.8.19
 
 #### Should
 
-- optimize accuracy
-  - revisit lookup of MultiMap
-  - (-10 .. 0) might be more accurate (significant digits)?
-  - double instead of floats? (good table?)
-  - make use of equidistant \_\_z\[] table
-
 
 #### Could
 
 - add examples
   - e.g. temperature (DS18B20 or DHT22)
   - e.g. loadcell (HX711)
-- embed MultiMap hardcoded instead of library dependency
 - add unit tests
-- remove **\_stddev** as **\_reciprokeSD** holds same information.
-- reverse normalization
-  - G(100,25) which value has stddev 0.735?
 - **VAL(probability = 0.75)** ==>  134 whatever
   - Returns the value of the distribution for which the **CDF()** is at least probability.
-  - Inverse of **P_smaller()**
-- **float P_outside(float f, float g)** returns probability **P(x < f) + P(g < x)**.
-  - assuming no overlap. Use **P_outside() = 1 - P_between()**
-
+  - Inverse of **P_smaller()** (how? binary search)
+  
 
 #### Won't (unless requested)
 
@@ -177,5 +166,5 @@ ESP32, 240 MHz, IDE 1.8.19
 - move code to .cpp file? (rather small lib).
 - **void setMean(float f)** can be done with begin()
 - **void setStddev(float f)** can be done with begin()
-
-
+- optimize accuracy
+  - (-6 .. 0) might be more accurate (significant digits)?
