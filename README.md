@@ -99,15 +99,20 @@ This uses the bell curve formula.
 - **float P_outside(float f, float g)** returns probability **P(x < f) + P(g < x)**.
   - **P_outside() = 1 - P_between()**
 
-#### Other
+
+#### Normalize
 
 - **float normalize(float f)** normalize a value to normalized distribution.
+E.g if mean == 50 and stddev == 14, then 71 ==> +1.5 sigma.
 Is equal to number of **stddevs()**.
 - **float denormalize(float f)** reverses normalize(). 
 What value would have a deviation of 1.73 stddev.
 - **float stddevs(float f)** returns the number of stddevs from the mean.
-E.g if mean == 50 and stddev == 14, then 71 ==> +1.5 sigma.
 Identical to **normalize()**.
+
+
+#### Other
+
 - **float bellCurve(float f)** returns probability **P(x == f)**.
 
 
@@ -152,8 +157,6 @@ ESP32, 240 MHz, IDE 1.8.19
 #### Could
 
 - add examples
-  - e.g. temperature (DS18B20 or DHT22)
-  - e.g. loadcell (HX711)
 - add unit tests
 - **VAL(probability = 0.75)** ==>  134 whatever
   - Returns the value of the distribution for which the **CDF()** is at least probability.
