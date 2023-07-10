@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [0.2.0] - 2023-07-07
+## [0.2.0] - 2023-07-10
 - improve performance => faster lookup.
   - removed __z[] saves 136 bytes RAM
 - remove MultiMap dependency.
@@ -14,7 +14,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - add **float P_outside(float f, float g)** 
   - returns **P(x < f) + P(g < x)** under condition (f < g).
 - add **float denormalize(float value)** (reverse normalize).
-- add examples DS18B20 and HX711
+- add examples DS18B20 and HX711 and BMI
+- update readme.md
 - minor edits.
 
 

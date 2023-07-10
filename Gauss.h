@@ -105,12 +105,20 @@ public:
   }
 
 
+  float CDF(float value)
+  {
+    return P_smaller(value);
+  }
+
+
 
 private:
 
   float _P_smaller(float x)
   {
     //  NORM.DIST(mean, stddev, x, true)
+    //  these points correspond with
+    //  0.0 .. 3.0 in steps of 0.1 followed by 4.0, 5.0 and 6.0 
     float __gauss[] = {
       0.50000000, 0.53982784, 0.57925971, 0.61791142,
       0.65542174, 0.69146246, 0.72574688, 0.75803635,
