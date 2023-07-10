@@ -8,7 +8,6 @@
 
 
 #include "Arduino.h"
-#include "MultiMap.h"
 
 #define GAUSS_LIB_VERSION       (F("0.2.0"))
 
